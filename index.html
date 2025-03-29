@@ -44,7 +44,7 @@
 
         document.getElementById("status").innerText = "Generating...";
 
-        const response = await fetch("https://your-backend-url.com/speak", {
+        const response = await fetch("https://speech-api-w0z9.onrender.com/speak", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ apiKey, voice, instructions, input: inputText }),
