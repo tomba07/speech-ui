@@ -1,39 +1,77 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <title>OpenAI TTS Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body>
-    <h2>Text-to-Speech Demo</h2>
-    <label>API Key: <input type="password" id="apiKey" /></label><br />
-    <label
-      >Voice:
-      <select id="voice">
-        <option value="alloy">Alloy</option>
-        <option value="ash">Ash</option>
-        <option value="ballad">Ballad</option>
-        <option value="coral">Coral</option>
-        <option value="echo">Echo</option>
-        <option value="fable">Fable</option>
-        <option value="onyx">Onyx</option>
-        <option value="nova">Nova</option>
-        <option value="sage">Sage</option>
-        <option value="shimmer">Shimmer</option>
-      </select> </label
-    ><br />
-    <label
-      >Instructions:<br />
-      <textarea id="instructions" rows="3" cols="50">Speak in a cheerful and positive tone.</textarea></label
-    ><br />
-    <label
-      >Input Text:<br />
-      <textarea id="inputText" rows="4" cols="50"></textarea></label
-    ><br />
-    <button onclick="generateSpeech()">Generate</button>
-    <p id="status"></p>
-    <audio id="audioPlayer" controls></audio>
+  <body class="bg-gray-100 min-h-screen flex items-center justify-center px-4">
+    <div class="bg-white shadow-md rounded-2xl p-8 max-w-lg w-full">
+      <h2 class="text-2xl font-semibold text-center mb-6 text-gray-800">OpenAI Text-to-Speech</h2>
+
+      <div class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700">API Key</label>
+          <input
+            type="password"
+            id="apiKey"
+            placeholder="sk-..."
+            class="mt-1 w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring focus:border-blue-400"
+          />
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Voice</label>
+          <select
+            id="voice"
+            class="mt-1 w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring focus:border-blue-400"
+          >
+            <option value="alloy">Alloy</option>
+            <option value="ash">Ash</option>
+            <option value="ballad">Ballad</option>
+            <option value="coral">Coral</option>
+            <option value="echo">Echo</option>
+            <option value="fable">Fable</option>
+            <option value="onyx">Onyx</option>
+            <option value="nova">Nova</option>
+            <option value="sage">Sage</option>
+            <option value="shimmer">Shimmer</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Instructions</label>
+          <textarea
+            id="instructions"
+            rows="2"
+            class="mt-1 w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring focus:border-blue-400"
+          >
+Speak in a cheerful and positive tone.</textarea
+          >
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Input Text</label>
+          <textarea
+            id="inputText"
+            rows="4"
+            placeholder="Enter your text here..."
+            class="mt-1 w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring focus:border-blue-400"
+          ></textarea>
+        </div>
+
+        <button
+          onclick="generateSpeech()"
+          class="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-200"
+        >
+          Generate
+        </button>
+
+        <p id="status" class="text-center text-sm text-gray-600 mt-2"></p>
+
+        <audio id="audioPlayer" class="w-full mt-4" controls></audio>
+      </div>
+    </div>
 
     <script>
       async function generateSpeech() {
@@ -51,7 +89,7 @@
         });
 
         if (!response.ok) {
-          document.getElementById("status").innerText = "Error generating speech";
+          document.getElementById("status").innerText = "Error generating speech.";
           return;
         }
 
@@ -60,7 +98,7 @@
         const audio = document.getElementById("audioPlayer");
         audio.src = url;
         audio.play();
-        document.getElementById("status").innerText = "Done!";
+        document.getElementById("status").innerText = "Speech generated!";
       }
     </script>
   </body>
